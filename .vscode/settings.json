@@ -1,0 +1,51 @@
+{
+    "latex-workshop.latex.tools": [
+        {
+            "name": "jobname",
+            "command": "python",
+            "args": [
+                "%WORKSPACE_FOLDER%/.vscode/jobname.py",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pdfname",
+            "command": "python",
+            "args": [
+                "%WORKSPACE_FOLDER%/.vscode/pdfname.py",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "lualatex",
+            "command": "lualatex",
+            "args": [
+                "-jobname=!"
+                "-output-directory=../out",
+                "-aux-directory=../auxil",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-halt-on-error",
+                "-c-style-errors",
+                "%DOC%"
+
+            ]
+        }
+    ],
+
+    "latex-workshop.latex.jobname": "!",
+
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "lab report",
+            "tools": [
+                "jobname",
+                "lualatex",
+                "pdfname"
+            ]
+        }
+    ],
+    
+    "latex-workshop.latex.outDir": "../out",
+    "python.terminal.activateEnvironment": false
+}

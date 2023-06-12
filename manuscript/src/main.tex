@@ -1,0 +1,26 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{preamble}
+\title{Title}
+\author{author}
+\newcommand{\grade}{3rd}
+\newcommand{\group}{B}
+\newcommand{\lab}{12}
+\date{Month day, year}
+
+\begin{document}
+    \maketitle
+    \titlepage
+    \shipout\null
+    {\hypersetup{hidelinks}\tableofcontents}
+    \newpage
+    \input{introduction}
+    \input{methods}
+    \input{results}
+    \input{discussion}
+    \input{conclusion}
+    \include{annex}
+    \bibliographystyle{plain}
+    \bibliography{bibliography}
+
+\end{document}

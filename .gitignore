@@ -1,0 +1,13 @@
+venv/
+code/__pycache__/
+data/*
+!data/README.md
+manuscript/src/figures/*
+!manuscript/src/figures/README.md
+!manuscript/src/figures/logoucm.png
+manuscript/src/tables/*
+!manuscript/src/tables/README.md
+manuscript/auxil/*
+!manuscript/auxil/README.md
+manuscript/out/*
+!manuscript/out/README.md

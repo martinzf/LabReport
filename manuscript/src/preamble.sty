@@ -1,0 +1,113 @@
+\usepackage{luacode}
+\usepackage{float} % Figure & table positioning
+\usepackage{textcomp} % Symbols
+\usepackage[usenames,dvipsnames]{color} % Colours
+\usepackage{tabularray,adjustbox} % Tables
+\usepackage[labelfont=bf,skip=5pt,font=small]{caption} % Captions
+\usepackage{subcaption} % Subcaptions
+\usepackage{natbib} % Citations
+\usepackage{graphicx,wrapfig} % Images
+\usepackage{amsmath,mathtools} % Maths
+\usepackage{siunitx} % SI units
+\usepackage[margin=1in]{geometry} % Margins
+\usepackage[doublespacing]{setspace} % Double spacing
+\usepackage{fontspec} % Font
+\setlength\parindent{0.5in} % Indents
+\setmainfont{Times New Roman} % Text font
+\usepackage{hyphenat} % Hyphen control
+\usepackage{hyperref} % Hyperlinks
+\usepackage[capitalise]{cleveref} % References
+\usepackage{newtxmath} % Ignore capital greek letters in \mathrm{}
+\makeatletter
+  \re@DeclareMathSymbol{\Gamma}{\mathord}{lettersA}{0}
+  \re@DeclareMathSymbol{\Delta}{\mathord}{lettersA}{1}
+  \re@DeclareMathSymbol{\Theta}{\mathord}{lettersA}{2}
+  \re@DeclareMathSymbol{\Lambda}{\mathord}{lettersA}{3}
+  \re@DeclareMathSymbol{\Xi}{\mathord}{lettersA}{4}
+  \re@DeclareMathSymbol{\Pi}{\mathord}{lettersA}{5}
+  \re@DeclareMathSymbol{\Sigma}{\mathord}{lettersA}{6}
+  \re@DeclareMathSymbol{\Upsilon}{\mathord}{lettersA}{7}
+  \re@DeclareMathSymbol{\Phi}{\mathord}{lettersA}{8}
+  \re@DeclareMathSymbol{\Psi}{\mathord}{lettersA}{9}
+  \re@DeclareMathSymbol{\Omega}{\mathord}{lettersA}{10}
+\makeatother
+
+% replace l with cursive ell in math mode
+\mathcode`l="8000
+\begingroup
+\makeatletter
+\lccode`\~=`\l
+\DeclareMathSymbol{\lsb@l}{\mathalpha}{letters}{`l}
+\lowercase{\gdef~{\ifnum\the\mathgroup=\m@ne \ell \else \lsb@l \fi}}%
+\endgroup
+
+% Extra macros
+\newcommand{\rom}[1]{\uppercase\expandafter{\romannumeral #1\relax}} % Roman numerals
+\newcommand{\der}[3][]{
+    \ifthenelse{\equal{#1}{}}
+    {\frac{\mathrm{d} #2}{\mathrm{d} #3}}
+    {\frac{{\mathrm{d}^{#1} #2}}{{\mathrm{d} #3^{#1}}}}} % Derivative
+\newcommand{\pder}[3][]{
+    \ifthenelse{\equal{#1}{}}
+    {\frac{\partial #2}{\partial #3}}
+    {\frac{{\partial^{#1} #2}}{{\partial #3^{#1}}}}} % Partial derivative
+\newcommand{\nsum}{\sum\limits_{i=1}^{n}} % Sum from 1 to n
+\newcommand{\isum}{\sum\limits_{i=1}^{\infty}} % Sum from 1 to infinity
+\newcommand{\lag}{\mathcal{L}} % Lagrangian symbol
+\newcommand{\academicYear}{ % Current academic year
+    \ifnum 8 < \the\month{}
+        \the\year{}-\luaexec{tex.print(\the\year+1)}
+    \else
+        \luaexec{tex.print(\the\year-1)}-\the\year{}
+    \fi
+}
+
+% Page number
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\itshape\makeatletter\@title\makeatother}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
+
+% Title formats
+\usepackage{indentfirst} % Indent paragraph after title
+\usepackage{titlesec}
+\usepackage{titling}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{.5em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection.}{.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{\thesubsubsection.}{.5em}{}
+\makeatletter
+\renewcommand{\maketitle}{%
+    \thispagestyle{empty}
+    \begin{center}
+        \begin{bfseries}
+            {\Large UNIVERSIDAD COMPLUTENSE DE MADRID}\\[.5cm]
+            {\Large FACULTAD DE CIENCIAS FÍSICAS}\\[1cm]
+            {\includegraphics[width=0.35\textwidth]{figures/logo_ucm.png}}\\[.8cm]
+            {\LARGE \@title}\\[1cm]
+            {\Large \@author}\\[.5cm]
+            \begin{large}
+                Group \group. Laboratory \lab\\
+                Experiment Date: \@date\\
+                Handed in: \today\\
+                \vspace*{\fill}
+                {\grade} Year Physics Degree\\[5mm]
+                \academicYear{} Academic Year
+            \end{large}
+        \end{bfseries}
+    \end{center}
+}
+\makeatother
+
+% Hyperlink style
+\hypersetup{
+    colorlinks=true,
+    allcolors=Violet,
+    pdfborderstyle={/S/U/W 0.5}
+}
+
+% Importing variables from Python
+\usepackage{datatool,filecontents}
+\DTLsetseparator{,} % Keys and values separated by comma
+\DTLloaddb[noheader,keys={key,value}]{latexvars}{latexvars.dat}
+\newcommand{\var}[1]{\DTLfetch{latexvars}{key}{#1}{value}}
